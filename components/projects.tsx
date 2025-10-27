@@ -4,7 +4,9 @@ import { useInView } from "@/hooks/use-in-view"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Github } from "lucide-react"
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { SimpleIconComponent } from '@/components/ui/simple-icon'
+import { siGithub } from 'simple-icons'
 
 const projects = [
   {
@@ -69,13 +71,13 @@ export function Projects() {
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" asChild>
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4 mr-2" />
+                        <SimpleIconComponent icon={siGithub} className="w-4 h-4 mr-2" />
                         Code
                       </a>
                     </Button>
                     <Button size="sm" asChild>
                       <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4 mr-2" />
+                        <ArrowTopRightOnSquareIcon className="w-4 h-4 mr-2" />
                         Demo
                       </a>
                     </Button>
