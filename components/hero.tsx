@@ -16,9 +16,11 @@ export function Hero() {
             Software Engineer
           </p>
           <p className='text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed'>
-            I build elegant, performant, and scalable web applications.
-            Passionate about creating exceptional user experiences through clean
-            code and thoughtful design.
+            I am a dynamic fullstack engineer with a proven track record of
+            delivering impactful projects. I excel at driving innovation and
+            collaborating across teams to deliver efficient solutions. Known for
+            optimizing user experiences and fostering business growth through
+            technical excellence and cross-functional teamwork.
           </p>
           <div className='flex items-center justify-center gap-4 pt-4'>
             <Button asChild size='lg'>

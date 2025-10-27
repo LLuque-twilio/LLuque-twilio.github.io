@@ -127,4 +127,18 @@
   html {
     scroll-behavior: smooth;
   }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(600%);
+      opacity: 0;
+    }
+  }
 }
