@@ -93,4 +93,29 @@
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0; }
   }
+
+  /* Boot overlay: present at first paint, holds while lines reveal, then fades
+     out and removes itself. Pure CSS so it can never appear *after* content. */
+  @keyframes boot-overlay-out {
+    0%, 72% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  @keyframes boot-line-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .boot-overlay {
+    animation: boot-overlay-out 1.3s ease-in-out forwards;
+  }
+  .boot-line {
+    opacity: 0;
+    animation: boot-line-in 0.18s ease-out forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .boot-overlay {
+      display: none;
+    }
+  }
 }
