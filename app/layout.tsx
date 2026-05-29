@@ -1,26 +1,37 @@
 import type React from 'react';
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
-const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Logan Luque - Software Engineer',
-  description: 'Software Engineer Portfolio & Resume',
+  title: 'Logan Luque — Software Engineer',
+  description:
+    'Logan Luque — Senior Software Engineer at Twilio. Fullstack developer working in React, Go, TypeScript, and more.',
+  authors: [{ name: 'Logan Luque' }],
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang='en' className='dark'>
-      <body className={`font-sans antialiased`}>
-        {children}
+    <html lang='en' suppressHydrationWarning className={jetbrainsMono.variable}>
+      <body className='font-mono antialiased'>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='dark'
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
