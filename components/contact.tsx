@@ -27,6 +27,7 @@ export function Contact() {
       className='flex min-h-screen items-center px-6 py-24'
       ref={ref}
     >
+      <h2 className='sr-only'>Contact</h2>
       <div
         className={`container mx-auto w-full max-w-4xl transition-all duration-700 ${
           isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'

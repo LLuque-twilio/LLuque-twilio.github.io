@@ -11,6 +11,7 @@ export function Skills() {
 
   return (
     <section id='skills' className='px-6 py-24' ref={ref}>
+      <h2 className='sr-only'>Skills</h2>
       <div
         className={`container mx-auto max-w-4xl transition-all duration-700 ${
           isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'

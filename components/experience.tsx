@@ -1,6 +1,5 @@
 'use client';
 
-import type { Ref } from 'react';
 import { useInView } from '@/hooks/use-in-view';
 import { TerminalWindow } from '@/components/terminal-window';
 import {
@@ -15,12 +14,12 @@ import { cn } from '@/lib/utils';
 import { experiences, transitionConfig, type Experience as Exp } from '@/content/experience';
 
 function TimelineItem({ exp, index }: { exp: Exp; index: number }) {
-  const { ref, isInView } = useInView({ threshold: 0.2 });
+  const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.2 });
   const config = transitionConfig[exp.transitionType];
 
   return (
     <div
-      ref={ref as Ref<HTMLDivElement>}
+      ref={ref}
       className={cn(
         'relative pl-20 pb-12 last:pb-0 transition-all duration-700 md:pl-28',
         isInView ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
@@ -86,6 +85,7 @@ export function Experience() {
 
   return (
     <section id='experience' className='px-6 py-24' ref={ref}>
+      <h2 className='sr-only'>Experience</h2>
       <div
         className={`container mx-auto max-w-4xl transition-all duration-700 ${
           isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'

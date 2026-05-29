@@ -35,15 +35,19 @@ export function Navigation() {
       if (current) setActiveSection(current);
     };
 
+    let rafId = 0;
     const handleScroll = () => {
       if (ticking.current) return;
       ticking.current = true;
-      requestAnimationFrame(update);
+      rafId = requestAnimationFrame(update);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     update();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
