@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useInView } from '@/hooks/use-in-view';
 import { TerminalWindow } from '@/components/terminal-window';
 import { Button } from '@/components/ui/button';
@@ -20,6 +21,10 @@ function SocialIcon({ icon }: { icon: Social['icon'] }) {
 
 export function Contact() {
   const { ref, isInView } = useInView();
+  // Render the year on the client so a static build doesn't freeze it and
+  // there's no SSR/CSR hydration mismatch across a year boundary.
+  const [year, setYear] = useState<number | null>(null);
+  useEffect(() => setYear(new Date().getFullYear()), []);
 
   return (
     <section
@@ -65,7 +70,7 @@ export function Contact() {
             <div className='border-t border-border pt-6'>
               <p className='font-mono text-xs text-muted-foreground'>
                 <span className='select-none text-secondary'>$ </span>
-                echo &quot;© {new Date().getFullYear()} {profile.name} · built with
+                echo &quot;© {year ?? ''} {profile.name} · built with
                 Next.js + Tailwind CSS&quot;
               </p>
             </div>
