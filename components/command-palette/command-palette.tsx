@@ -28,19 +28,23 @@ interface LogLine {
   kind: 'echo' | 'output';
 }
 
-let lineId = 0;
-const makeLine = (text: string, kind: LogLine['kind']): LogLine => ({
-  id: lineId++,
-  text,
-  kind,
-});
-
 export function CommandPalette() {
   const { open, setOpen } = useCommandPalette();
   const { theme, setTheme } = useTheme();
 
+  // Monotonic id source for log lines, kept per-instance so it survives Fast
+  // Refresh and never collides across remounts.
+  const nextId = useRef(0);
+  const makeLine = (text: string, kind: LogLine['kind']): LogLine => ({
+    id: nextId.current++,
+    text,
+    kind,
+  });
+
   const [value, setValue] = useState('');
-  const [log, setLog] = useState<LogLine[]>(() => [makeLine(HINT, 'output')]);
+  const [log, setLog] = useState<LogLine[]>(() => [
+    { id: nextId.current++, text: HINT, kind: 'output' },
+  ]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
