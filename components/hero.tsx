@@ -1,49 +1,70 @@
 'use client';
 
-import { ArrowDownIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowDownIcon,
+  ArrowDownTrayIcon,
+  EnvelopeIcon,
+  ArrowTopRightOnSquareIcon,
+} from '@heroicons/react/24/outline';
 import { Button } from '@/components/ui/button';
+import { Typewriter } from '@/components/typewriter';
+import { BootSequence } from '@/components/boot-sequence';
+import { TerminalWindow } from '@/components/terminal-window';
+import { profile } from '@/content/profile';
 
 export function Hero() {
   return (
-    <section className='min-h-screen flex items-center justify-center relative px-6'>
-      <div className='container mx-auto max-w-4xl text-center'>
-        <div className='space-y-6 animate-fade-in-up'>
-          <h1 className='text-5xl md:text-7xl font-bold text-balance'>
-            Well hello there, I'm{' '}
-            <span className='text-primary'>Logan Luque</span>
-          </h1>
-          <p className='text-xl md:text-2xl text-muted-foreground text-balance'>
-            Software Engineer
-          </p>
-          <p className='text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed'>
-            I am a dynamic fullstack engineer with a proven track record of
-            delivering impactful projects. I excel at driving innovation and
-            collaborating across teams to deliver efficient solutions. Known for
-            optimizing user experiences and fostering business growth through
-            technical excellence and cross-functional teamwork.
-          </p>
-          <div className='flex items-center justify-center gap-4 pt-4'>
-            <Button asChild size='lg'>
-              <a href='#contact'>Get in Touch</a>
-            </Button>
-            <Button asChild variant='outline' size='lg'>
-              <a href='/resume.pdf' download='Your_Name_Resume.pdf'>
-                <ArrowDownTrayIcon className='w-4 h-4 mr-2' />
-                Download Resume
-              </a>
-            </Button>
-            <Button asChild variant='ghost' size='lg'>
-              <a href='#experience'>View Experience</a>
-            </Button>
-          </div>
+    <section className='relative flex min-h-screen items-center justify-center px-6'>
+      <BootSequence lines={['> booting portfolio...', '> session ready ✓']}>
+        <div className='container mx-auto max-w-3xl'>
+          <TerminalWindow command='whoami' title='logan@portfolio: ~'>
+            <div className='space-y-6'>
+              <h1 className='text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl'>
+                <Typewriter text={profile.name} className='text-primary' />
+              </h1>
+
+              <p className='font-mono text-base text-muted-foreground sm:text-lg'>
+                <span className='text-secondary'>role</span>
+                <span className='text-muted-foreground'>=</span>
+                <span className='text-accent'>&quot;{profile.role}&quot;</span>
+              </p>
+
+              <p className='max-w-2xl text-pretty leading-relaxed text-foreground/90'>
+                <span className='select-none text-muted-foreground'># </span>
+                {profile.tagline}
+              </p>
+
+              <div className='flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center'>
+                <Button asChild size='lg'>
+                  <a href='#contact'>
+                    <EnvelopeIcon className='size-4' />
+                    Get in touch
+                  </a>
+                </Button>
+                <Button asChild variant='outline' size='lg'>
+                  <a href={profile.resumePath} download>
+                    <ArrowDownTrayIcon className='size-4' />
+                    Download resume
+                  </a>
+                </Button>
+                <Button asChild variant='ghost' size='lg'>
+                  <a href='#projects'>
+                    <ArrowTopRightOnSquareIcon className='size-4' />
+                    View work
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </TerminalWindow>
         </div>
-      </div>
+      </BootSequence>
+
       <a
         href='#about'
-        className='absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce'
+        className='absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground transition-colors hover:text-primary'
         aria-label='Scroll to about section'
       >
-        <ArrowDownIcon className='w-6 h-6 text-muted-foreground' />
+        <ArrowDownIcon className='size-6' />
       </a>
     </section>
   );
