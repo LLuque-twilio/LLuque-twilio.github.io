@@ -32,8 +32,7 @@ export const profile = {
   ] as FunFact[],
   socials: [
     { name: 'GitHub', href: 'https://github.com/LLuque-twilio', icon: 'github' },
-    // TODO(logan): real LinkedIn URL
-    { name: 'LinkedIn', href: 'https://linkedin.com/in/TODO', icon: 'linkedin' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/logan-luque', icon: 'linkedin' },
     // TODO(logan): real contact email
     { name: 'Email', href: 'mailto:TODO@example.com', icon: 'email' },
   ] as Social[],
