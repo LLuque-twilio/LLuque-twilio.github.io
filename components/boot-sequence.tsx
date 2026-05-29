@@ -8,7 +8,7 @@ interface BootSequenceProps {
 }
 
 const BOOT_KEY = "boot-shown"
-const LINE_MS = 400
+const LINE_MS = 320
 const FADE_MS = 250
 
 export function BootSequence({ lines, children }: BootSequenceProps) {
@@ -42,18 +42,18 @@ export function BootSequence({ lines, children }: BootSequenceProps) {
 
     const timers: ReturnType<typeof setTimeout>[] = []
 
-    // Reveal lines one at a time.
-    setVisibleLines(0)
+    // Reveal lines one at a time (line i appears at (i+1)*LINE_MS so every
+    // line — including the first — gets a full beat of dwell).
     for (let i = 0; i < lines.length; i += 1) {
       timers.push(
         setTimeout(() => {
           setVisibleLines(i + 1)
-        }, i * LINE_MS),
+        }, (i + 1) * LINE_MS),
       )
     }
 
-    // Begin fade after the last line has shown, then unmount the overlay.
-    const fadeStart = lines.length * LINE_MS
+    // Begin fade after the last line has held for one full beat, then unmount.
+    const fadeStart = (lines.length + 1) * LINE_MS
     timers.push(
       setTimeout(() => {
         setFading(true)
@@ -87,8 +87,8 @@ export function BootSequence({ lines, children }: BootSequenceProps) {
           style={{ opacity: fading ? 0 : 1 }}
         >
           <pre className="font-mono text-sm leading-relaxed text-secondary">
-            {lines.slice(0, visibleLines).map((line) => (
-              <span key={line} className="block">
+            {lines.slice(0, visibleLines).map((line, index) => (
+              <span key={index} className="block">
                 {line}
               </span>
             ))}
