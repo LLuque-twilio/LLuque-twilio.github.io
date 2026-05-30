@@ -37,3 +37,6 @@ yarn-error.log*
 
 # internal design docs (kept local, not published)
 docs/superpowers/
+
+# next.js generated (regenerated on build)
+next-env.d.ts
